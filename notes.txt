@@ -1,0 +1,27 @@
+
+Node:-
+Single threaded
+Non blocking I/O
+Event
+
+Features of ES-6:-
+1. let and const
+2. fetch
+3. asynchronous programming
+4. arrow function
+5. filter,map,reduce
+6. destructuring
+7. template literal
+8. rest and spread
+
+
+git commands:-
+
+$git --version
+$git config --global username " "
+$git config --global useremail " " 
+$git --list
+$git clone URL
+$git status
+$git add ex1.js
+$git commit -m "first commit"
