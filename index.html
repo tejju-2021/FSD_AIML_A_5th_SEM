@@ -4,9 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Synchronous Demo</title>
-    <script src="./promisedemo.js"></script>
+    <script>
+           async function loaduserdetails(username){
+            try{
+                const url=`https://api.github.com/users/${username}`;
+                const res=await fetch(url);
+                const data=await res.json();
+                document.getElementById("para1").innerText=data.avatar_url;
+                document.getElementById("para1").style.color="red";
+                console.log("response:",res.json())
+            }catch(err){
+                console.log("Error:",err)
+            }
+        }
+        loaduserdetails("tejju-2021");
+    </script>
 </head>
 <body>
-    
+    <p id="para1">Loading user details...</p>
 </body>
 </html>
