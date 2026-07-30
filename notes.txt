@@ -13,6 +13,11 @@ Features of ES-6:-
 6. destructuring
 7. template literal
 8. rest and spread
+9. default value
+10. set & map
+11. class
+12. import & export module
+13. promise
 
 
 git commands:-
