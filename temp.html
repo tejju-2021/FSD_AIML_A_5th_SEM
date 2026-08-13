@@ -19,6 +19,33 @@
         color: #2c3e50;
       }
 
+      .search-bar {
+        text-align: center;
+        margin: 20px 0;
+      }
+
+      .search-bar input {
+        padding: 8px;
+        width: 250px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+      }
+
+      .search-bar button {
+        padding: 8px 14px;
+        margin-left: 8px;
+        background: #3498db;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.2s ease;
+      }
+
+      .search-bar button:hover {
+        background: #1d6fa5;
+      }
+
       .user-card {
         border: 1px solid #ddd;
         padding: 20px;
@@ -77,6 +104,12 @@
   <body>
     <h1>GitHub User Details</h1>
 
+    <!-- Search bar -->
+    <div class="search-bar">
+      <input type="text" id="usernameInput" placeholder="Enter GitHub username" />
+      <button onclick="searchUser()">Search</button>
+    </div>
+
     <div id="user"></div>
 
     <script>
@@ -87,7 +120,6 @@
 
         try {
           const url = `https://api.github.com/users/${username}`;
-
           const res = await fetch(url);
 
           if (!res.ok) {
@@ -102,40 +134,29 @@
 
               <h2>${data.login}</h2>
 
-              <p>
-                <strong>Name:</strong>
-                ${data.name || "N/A"}
-              </p>
+              <p><strong>Name:</strong> ${data.name || "N/A"}</p>
+              <p><strong>Bio:</strong> ${data.bio || "No bio available"}</p>
+              <p><strong>Public Repos:</strong> ${data.public_repos}</p>
+              <p><strong>Followers:</strong> ${data.followers}</p>
 
-              <p>
-                <strong>Bio:</strong>
-                ${data.bio || "No bio available"}
-              </p>
-
-              <p>
-                <strong>Public Repos:</strong>
-                ${data.public_repos}
-              </p>
-
-              <p>
-                <strong>Followers:</strong>
-                ${data.followers}
-              </p>
-
-              <a href="${data.html_url}" target="_blank">
-                View Profile
-              </a>
+              <a href="${data.html_url}" target="_blank">View Profile</a>
             </div>
           `;
         } catch (err) {
-          userDiv.innerHTML = `
-            <p style="color:red;">
-              Error: ${err.message}
-            </p>
-          `;
+          userDiv.innerHTML = `<p style="color:red;">Error: ${err.message}</p>`;
         }
       }
 
+      function searchUser() {
+        const username = document.getElementById("usernameInput").value.trim();
+        if (username) {
+          loaduserdetails(username);
+        } else {
+          alert("Please enter a GitHub username.");
+        }
+      }
+
+      // Load default user initially
       loaduserdetails("tejju-2021");
     </script>
   </body>
